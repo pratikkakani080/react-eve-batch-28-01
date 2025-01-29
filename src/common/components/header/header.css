@@ -1,0 +1,21 @@
+.header{
+    display: flex;
+    justify-content: space-around;
+align-items: center;
+background-color: gray;
+}
+.middle a{
+    text-decoration: none;
+    color: black;
+    padding:  0 10px;
+    align-items: center;
+    color: white;
+}
+.right button{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    text-transform: uppercase;
+}
