@@ -1,18 +1,14 @@
 import React from 'react'
-import { test } from '../../utils'
+import Button from '../../elements/button'
+import './footer.css'
 
 export default function Footer() {
-  console.log(test)
   return (
-    <>
-      <div>
-        {test}
-      </div>
-      <div></div>
-    </>
+    <div className='footer'>
+      <Button
+        buttonText={'submit'}
+        color={'green'}
+      />
+    </div>
   )
-}
-
-export function Testing() {
-  return 'test'
 }

@@ -1,8 +1,16 @@
 import React from 'react'
+import './button.css'
 
-function Button() {
+function Button(props) {
+    console.log('props**', props);
+
     return (
-        <button>Veiw all</button>
+        <button
+            className={`button ${props.className}`}
+            style={{ backgroundColor: props.color }}
+        >
+            {props.buttonText || 'View all'}
+        </button>
     )
 }
 

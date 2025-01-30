@@ -11,11 +11,3 @@ background-color: gray;
     align-items: center;
     color: white;
 }
-.right button{
-    padding: 10px;
-    border-radius: 10px;
-    background-color: black;
-    color: white;
-    border: none;
-    text-transform: uppercase;
-}

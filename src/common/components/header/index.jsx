@@ -17,7 +17,7 @@ export default function Header() {
                     <a href='#'>{test}</a>
                 </div>
                 <div className='right'>
-                    <Button />
+                    <Button color={'magenta'} />
                 </div>
             </div>
         </div>
