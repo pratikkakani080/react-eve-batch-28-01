@@ -4,6 +4,9 @@ import Button from '../../elements/button'
 import { test } from '../../utils'
 
 export default function Header() {
+    const callbkFn = (data) => {
+        console.log('data***', data);
+    }
     return (
         <div>
             <div className='header'>
@@ -17,7 +20,10 @@ export default function Header() {
                     <a href='#'>{test}</a>
                 </div>
                 <div className='right'>
-                    <Button color={'magenta'} />
+                    <Button
+                        color={'magenta'}
+                        handler={callbkFn}
+                    />
                 </div>
             </div>
         </div>

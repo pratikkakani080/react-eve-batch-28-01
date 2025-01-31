@@ -1,15 +1,20 @@
 import React from 'react'
 import './button.css'
 
-function Button(props) {
-    console.log('props**', props);
-
+function Button({
+    handler,
+    className,
+    color,
+    buttonText
+}) {
+    const test = 342353254352
+    console.log('props**', handler && handler(test));
     return (
         <button
-            className={`button ${props.className}`}
-            style={{ backgroundColor: props.color }}
+            className={`button ${className}`}
+            style={{ backgroundColor: color }}
         >
-            {props.buttonText || 'View all'}
+            {buttonText || 'View all'}
         </button>
     )
 }
