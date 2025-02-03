@@ -5,7 +5,8 @@ function Button({
     handler,
     className,
     color,
-    buttonText
+    buttonText,
+    handleOnClick
 }) {
     const test = 342353254352
     console.log('props**', handler && handler(test));
@@ -13,6 +14,7 @@ function Button({
         <button
             className={`button ${className}`}
             style={{ backgroundColor: color }}
+            onClick={handleOnClick}
         >
             {buttonText || 'View all'}
         </button>
