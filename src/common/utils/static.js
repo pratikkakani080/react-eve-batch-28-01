@@ -1,6 +1,6 @@
 export const dataSet = [
   {
-    image: "Image1",
+    image: "https://cdn.dummyjson.com/recipe-images/3.webp",
     title: "title1",
   },
   {
