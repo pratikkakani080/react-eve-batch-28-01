@@ -1,0 +1,6 @@
+.recipesContainer {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    row-gap: 8px;
+    padding: 8px;
+}
