@@ -1,5 +1,6 @@
 import React from 'react'
 import "./card.css";
+import Button from '../../elements/button';
 
 function Card(props) {
     // console.log(props);
@@ -15,7 +16,11 @@ function Card(props) {
                     {props?.el?.title || props.el.name || 'test'}
                 </p>
             </div>
-
+            {(props.index === 0 || props.index === 16 || props.el.cuisine === 'Asian') && (
+                <div>
+                    <Button />
+                </div>
+            )}
         </div>
     )
 }
