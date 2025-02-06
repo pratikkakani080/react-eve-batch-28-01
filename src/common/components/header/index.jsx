@@ -24,10 +24,10 @@ export default function Header() {
                     <h2>logo{data}</h2>
                 </div>
                 <div className='middle'>
-                    <a href='#'>home</a>
-                    <a href='#'>about</a>
-                    <a href='#'>menu</a>
-                    <a href='#'>{test}</a>
+                    <a href='/'>Home</a>
+                    <a href='/about'>About</a>
+                    <a href='/contact-us'>Contact us</a>
+                    <a href='/privacy-policy'>Privacy Policy</a>
                 </div>
                 <div className='right'>
                     <Button
