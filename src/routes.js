@@ -17,7 +17,7 @@ function RouteContainer() {
     { path: "/about", element: <About /> },
     { path: "/contact-us", element: <ContactUs /> },
     { path: "/privacy-policy", element: <div></div> },
-    { path: "/card-details/:id", element: <CardDetails /> },
+    { path: "/card-details/:slug/:id", element: <CardDetails /> },
   ]);
   return (
     <RouterProvider router={routingList}></RouterProvider>

@@ -14,7 +14,7 @@ function Home() {
                     return (
                         <div key={i} onClick={() => {
                             localStorage.setItem('data', JSON.stringify(el))
-                            navigate('/card-details')
+                            navigate(`/card-details?title=${el.title}`)
                         }}>
                             <Card el={el} />
                         </div>

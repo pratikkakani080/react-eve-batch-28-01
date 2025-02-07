@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Card from "../card";
 import "./recipes.css";
+import { useNavigate } from "react-router";
 
 function Recipes() {
   const [recipes, setRecipes] = useState({});
   const [filteredRecipes, setFilteredRecipes] = useState({});
+  const navigate = useNavigate()
   console.log("recipes**", recipes.recipes);
 
   useEffect(() => {
@@ -40,7 +42,9 @@ function Recipes() {
       <div className="recipesContainer">
         {recipes.recipes?.map((el, i) => {
           return (
-            <div key={i}>
+            <div key={i} onClick={() => {
+              navigate('/card-details/' + el.name + '/' + el.id)
+            }}>
               <Card el={el} index={i} />
             </div>
           );
