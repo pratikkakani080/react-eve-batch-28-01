@@ -4,11 +4,11 @@ import { dataSet } from '../../../utils/static'
 
 function CardDetails() {
     const [cardData, setCardData] = useState(JSON.parse(localStorage.getItem('data')))
-    const params = useParams()
-    const [searchParams, _] = useSearchParams()
+    const params = useParams() // used to fetch details from dynamic routing
+    const [searchParams, _] = useSearchParams()  // used to fetch query params from URL
     const title = searchParams.get('title') || ''
     const id = searchParams.get('id')
-    console.log('filterdData**', dataSet.filter(el => el.title === title))
+    console.log('filterdData**', dataSet.find(el => el.title === title))
     console.log('params**', params)
 
     useEffect(() => {
@@ -17,7 +17,7 @@ function CardDetails() {
                 return res.json();
             })
             .then((res) => {
-                console.log('filterdData**', res.recipes.filter(el => el.id === Number(id || params.id)))
+                console.log('filterdData**', res.recipes.find(el => el.id === Number(id || params.id)))
             });
     }, []);
     return (
