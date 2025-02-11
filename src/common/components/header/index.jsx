@@ -31,6 +31,7 @@ export default function Header() {
                 </div>
                 <div className='right'>
                     <Button
+                        buttonText={'Login'}
                         color={'magenta'}
                         handler={callbkFn}
                         handleOnClick={handleOnClick}

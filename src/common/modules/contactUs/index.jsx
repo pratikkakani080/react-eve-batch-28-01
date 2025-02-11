@@ -6,6 +6,7 @@ function ContactUs() {
     
     const handleChange = (event) => {
         const { name, value } = event.target
+        console.log("target***",event.target)
         setFormData(formData=> ({ ...formData, [name]: value }))
     }
 
