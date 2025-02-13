@@ -12,14 +12,17 @@ export default function Login() {
   }
 
   const submit = () => {
-    localStorage.setItem('text', data.text)
-    localStorage.setItem('password', data.password)
-    localStorage.setItem('email', data.email)
-    localStorage.setItem('number', data.number)
-    localStorage.setItem('checkbox', data.checkbox)
-    localStorage.setItem('radio', data.radio)
-    localStorage.setItem('date', data.date)
-    localStorage.setItem('textarea', data.textarea)
+    // localStorage.setItem('text', data.text)
+    // localStorage.setItem('password', data.password)
+    // localStorage.setItem('email', data.email)
+    // localStorage.setItem('number', data.number)
+    // localStorage.setItem('checkbox', data.checkbox)
+    // localStorage.setItem('radio', data.radio)
+    // localStorage.setItem('date', data.date)
+    // localStorage.setItem('textarea', data.textarea)
+    localStorage.setItem({
+      text:data.text
+    })
     setData({ text: '', password: '', email: '', number: '', checkbox: '', radio: '', date: '', textarea: '' }) 
   }
   return (
