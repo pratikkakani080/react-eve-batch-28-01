@@ -4,6 +4,7 @@ import Button from '../../elements/button'
 function ContactUs() {
     const [user, setUser] = useState({})
     const [errors, setErrors] = useState({})
+    const [page, setPage] = useState('page1')
 
     const validate = () => {
         let error = {}
@@ -45,25 +46,50 @@ function ContactUs() {
         setUser({ ...user, ['hobbies']: arr })
     }
 
+    const handleFormRender = () => {
+        switch (page) {
+            case 'page1':
+                return (
+                    <>
+                        <label htmlFor="fname">First name:</label>
+                        {errors.fname && <span style={{ fontSize: '10px', color: 'red' }}>{errors.fname}</span>}<br />
+                        <input type="text" id="fname" name="fname" placeholder='please enter fname' value={user.fname} onChange={(event) => handleOnChange(event)} /><br />
+                        <label htmlFor="lname">Last name:</label>
+                        {errors.lname && <span style={{ fontSize: '10px', color: 'red' }}>{errors.lname}</span>}<br />
+                        <input type="text" id="lname" name="lname" placeholder='please enter lname' onChange={(event) => handleOnChange(event)} /><br /><br />
+
+                        {/* <input id='reading' type='checkbox' name='reading' checked={hobbies.reading} onChange={(e) => setHobbies({ ...hobbies, [e.target.name]: e.target.checked })} />
+                    <label htmlFor='reading'>Reading</label><br />
+                    <input id='gaming' type='checkbox' name='gaming' checked={hobbies.gaming} onChange={(e) => setHobbies({ ...hobbies, [e.target.name]: e.target.checked })} />
+                    <label htmlFor='gaming'>Gaming</label><br /> */}
+
+                        <input id='reading' type='checkbox' name='reading' checked={null} onChange={(e) => handleCheckbox(e)} />
+                        <label htmlFor='reading'>Reading</label><br />
+                        <input id='gaming' type='checkbox' name='gaming' checked={null} onChange={(e) => handleCheckbox(e)} />
+                        <label htmlFor='gaming'>Gaming</label><br />
+                        <Button buttonText={'Next'} handleOnClick={() => { if (validate()) setPage('page2') }} />
+                    </>
+                )
+
+            case 'page2':
+                return (
+                    <>
+                        <label htmlFor='email' >Email:</label>
+                        <input type='email' id='email' name='email' placeholder='please enter valid email' />
+                        <Button buttonText={'Previous'} handleOnClick={() => setPage('page1')} />
+                        <Button buttonText={'Submit'} handleOnClick={handleSubmit} />
+                    </>
+                )
+
+
+            default:
+                break;
+        }
+    }
+
     return (
         <div>
-            <label htmlFor="fname">First name:</label>
-            {errors.fname && <span style={{ fontSize: '10px', color: 'red' }}>{errors.fname}</span>}<br />
-            <input type="text" id="fname" name="fname" placeholder='please enter fname' onChange={(event) => handleOnChange(event)} /><br />
-            <label htmlFor="lname">Last name:</label>
-            {errors.lname && <span style={{ fontSize: '10px', color: 'red' }}>{errors.lname}</span>}<br />
-            <input type="text" id="lname" name="lname" placeholder='please enter lname' onChange={(event) => handleOnChange(event)} /><br /><br />
-
-            {/* <input id='reading' type='checkbox' name='reading' checked={hobbies.reading} onChange={(e) => setHobbies({ ...hobbies, [e.target.name]: e.target.checked })} />
-            <label htmlFor='reading'>Reading</label><br />
-            <input id='gaming' type='checkbox' name='gaming' checked={hobbies.gaming} onChange={(e) => setHobbies({ ...hobbies, [e.target.name]: e.target.checked })} />
-            <label htmlFor='gaming'>Gaming</label><br /> */}
-
-            <input id='reading' type='checkbox' name='reading' checked={null} onChange={(e) => handleCheckbox(e)} />
-            <label htmlFor='reading'>Reading</label><br />
-            <input id='gaming' type='checkbox' name='gaming' checked={null} onChange={(e) => handleCheckbox(e)} />
-            <label htmlFor='gaming'>Gaming</label><br />
-            <Button buttonText={'Submit'} handleOnClick={handleSubmit} />
+            {handleFormRender()}
         </div>
     )
 }
