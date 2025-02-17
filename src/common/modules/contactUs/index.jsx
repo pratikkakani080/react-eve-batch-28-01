@@ -1,10 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../../elements/button'
+import { useNavigate, useSearchParams } from 'react-router'
+import { toast } from 'react-toastify'
 
 function ContactUs() {
     const [user, setUser] = useState({})
     const [errors, setErrors] = useState({})
     const [page, setPage] = useState('page1')
+    const navigate = useNavigate()
+    const storedUsers = JSON.parse(localStorage.getItem('userInfo'))
+    const [_params, _] = useSearchParams()
+    const params = _params.get('userName')
+
+    useEffect(() => {
+        setUser(storedUsers.find(el => params === `${el.fname}${el.lname}`))
+    }, [])
 
     const validate = () => {
         let error = {}
@@ -23,7 +33,14 @@ function ContactUs() {
 
     const handleSubmit = () => {
         if (validate()) {
-            localStorage.setItem('userInfo', JSON.stringify(user))
+            let listOfUsers = storedUsers || []
+            if (listOfUsers.find(el => el.fname === user.fname && el.lname === user.lname)) {
+                toast.error('user already exists')
+            } else {
+                listOfUsers.push(user)
+                localStorage.setItem('userInfo', JSON.stringify(listOfUsers))
+                navigate('/user-table')
+            }
         }
     }
     console.log('errors**', errors);
@@ -56,16 +73,16 @@ function ContactUs() {
                         <input type="text" id="fname" name="fname" placeholder='please enter fname' value={user.fname} onChange={(event) => handleOnChange(event)} /><br />
                         <label htmlFor="lname">Last name:</label>
                         {errors.lname && <span style={{ fontSize: '10px', color: 'red' }}>{errors.lname}</span>}<br />
-                        <input type="text" id="lname" name="lname" placeholder='please enter lname' onChange={(event) => handleOnChange(event)} /><br /><br />
+                        <input type="text" id="lname" name="lname" placeholder='please enter lname' value={user.lname} onChange={(event) => handleOnChange(event)} /><br /><br />
 
                         {/* <input id='reading' type='checkbox' name='reading' checked={hobbies.reading} onChange={(e) => setHobbies({ ...hobbies, [e.target.name]: e.target.checked })} />
                     <label htmlFor='reading'>Reading</label><br />
                     <input id='gaming' type='checkbox' name='gaming' checked={hobbies.gaming} onChange={(e) => setHobbies({ ...hobbies, [e.target.name]: e.target.checked })} />
                     <label htmlFor='gaming'>Gaming</label><br /> */}
 
-                        <input id='reading' type='checkbox' name='reading' checked={null} onChange={(e) => handleCheckbox(e)} />
+                        <input id='reading' type='checkbox' name='reading' checked={user?.hobbies?.includes('reading')} onChange={(e) => handleCheckbox(e)} />
                         <label htmlFor='reading'>Reading</label><br />
-                        <input id='gaming' type='checkbox' name='gaming' checked={null} onChange={(e) => handleCheckbox(e)} />
+                        <input id='gaming' type='checkbox' name='gaming' checked={user?.hobbies?.includes('gaming')} onChange={(e) => handleCheckbox(e)} />
                         <label htmlFor='gaming'>Gaming</label><br />
                         <Button buttonText={'Next'} handleOnClick={() => { if (validate()) setPage('page2') }} />
                     </>

@@ -10,6 +10,7 @@ import About from "./common/modules/about";
 import Home from "./common/modules/home";
 import ContactUs from "./common/modules/contactUs";
 import CardDetails from "./common/components/card/cardDetails";
+import UserTable from "./common/modules/userTable";
 
 function RouteContainer() {
   const routingList = createBrowserRouter([
@@ -18,6 +19,7 @@ function RouteContainer() {
     { path: "/contact-us", element: <ContactUs /> },
     { path: "/privacy-policy", element: <div></div> },
     { path: "/card-details/:slug/:id", element: <CardDetails /> },
+    { path: "/user-table", element: <UserTable /> },
   ]);
   return (
     <RouterProvider router={routingList}></RouterProvider>

@@ -28,6 +28,7 @@ export default function Header() {
                     <a href='/about'>About</a>
                     <a href='/contact-us'>Contact us</a>
                     <a href='/privacy-policy'>Privacy Policy</a>
+                    <a href='/user-table'>User list</a>
                 </div>
                 <div className='right'>
                     <Button
