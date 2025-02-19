@@ -2,18 +2,19 @@ import React, { useEffect, useState } from 'react'
 import Button from '../../elements/button'
 import { useNavigate, useSearchParams } from 'react-router'
 import { toast } from 'react-toastify'
+import { v4 as uuidv4 } from 'uuid';
 
 function ContactUs() {
     const [user, setUser] = useState({})
     const [errors, setErrors] = useState({})
     const [page, setPage] = useState('page1')
     const navigate = useNavigate()
-    const storedUsers = JSON.parse(localStorage.getItem('userInfo'))
-    const [_params, _] = useSearchParams()
-    const params = _params.get('userName')
+    const storedUsers = JSON.parse(localStorage.getItem('userInfo')) || []
+    const [_params] = useSearchParams()
+    const params = _params.get('id')
 
     useEffect(() => {
-        setUser(storedUsers.find(el => params === `${el.fname}${el.lname}`))
+        setUser(storedUsers.find(el => params === el.id) || {})
     }, [])
 
     const validate = () => {
@@ -37,13 +38,18 @@ function ContactUs() {
             if (listOfUsers.find(el => el.fname === user.fname && el.lname === user.lname)) {
                 toast.error('user already exists')
             } else {
-                listOfUsers.push(user)
-                localStorage.setItem('userInfo', JSON.stringify(listOfUsers))
-                navigate('/user-table')
+                if (params) {
+                    const updatedUsers = listOfUsers.map(el => el.id === params ? user : el)
+                    localStorage.setItem('userInfo', JSON.stringify(updatedUsers))
+                    navigate('/user-table')
+                } else {
+                    listOfUsers.push({ ...user, id: uuidv4() })
+                    localStorage.setItem('userInfo', JSON.stringify(listOfUsers))
+                    navigate('/user-table')
+                }
             }
         }
     }
-    console.log('errors**', errors);
 
 
     const handleOnChange = (event) => {
@@ -53,15 +59,16 @@ function ContactUs() {
     }
 
     const handleCheckbox = (e) => {
-        let arr = [...(user.hobbies || [])]
+        let arr = [...(user?.hobbies || [])]
         if (e.target.checked) {
             arr.push(e.target.name)
         } else {
             let i = arr.findIndex(el => el === e.target.name)
             arr.splice(i, 1)
         }
-        setUser({ ...user, ['hobbies']: arr })
+        setUser({ ...user, hobbies: arr })
     }
+
 
     const handleFormRender = () => {
         switch (page) {
@@ -70,10 +77,10 @@ function ContactUs() {
                     <>
                         <label htmlFor="fname">First name:</label>
                         {errors.fname && <span style={{ fontSize: '10px', color: 'red' }}>{errors.fname}</span>}<br />
-                        <input type="text" id="fname" name="fname" placeholder='please enter fname' value={user.fname} onChange={(event) => handleOnChange(event)} /><br />
+                        <input type="text" id="fname" name="fname" placeholder='please enter fname' value={user?.fname} onChange={(event) => handleOnChange(event)} /><br />
                         <label htmlFor="lname">Last name:</label>
                         {errors.lname && <span style={{ fontSize: '10px', color: 'red' }}>{errors.lname}</span>}<br />
-                        <input type="text" id="lname" name="lname" placeholder='please enter lname' value={user.lname} onChange={(event) => handleOnChange(event)} /><br /><br />
+                        <input type="text" id="lname" name="lname" placeholder='please enter lname' value={user?.lname} onChange={(event) => handleOnChange(event)} /><br /><br />
 
                         {/* <input id='reading' type='checkbox' name='reading' checked={hobbies.reading} onChange={(e) => setHobbies({ ...hobbies, [e.target.name]: e.target.checked })} />
                     <label htmlFor='reading'>Reading</label><br />

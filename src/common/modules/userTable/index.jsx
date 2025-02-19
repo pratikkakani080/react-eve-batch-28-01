@@ -7,7 +7,18 @@ function UserTable() {
     const navigate = useNavigate()
 
     const handleOnEdit = (user) => {
-        navigate(`/contact-us?userName=${user.fname}${user.lname}`)
+        navigate(`/contact-us?id=${user.id}`)
+    }
+
+    const handleOnDelete = (id) => {
+        if (window.confirm('Are you sure you want to delete the data?')) {
+            // delete fun
+            let usersList = users || []
+            const index = usersList.findIndex(el => el.id === id)
+            usersList.splice(index, 1)
+            setUsers(usersList)
+            localStorage.setItem('userInfo', JSON.stringify(usersList))
+        }
     }
 
     return (
@@ -19,6 +30,7 @@ function UserTable() {
                         <td>last name</td>
                         <td>hobbies</td>
                         <td>Edit</td>
+                        <td>Delete</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +41,7 @@ function UserTable() {
                                 <td>{user.lname}</td>
                                 <td>{user.hobbies.join(', ')}</td>
                                 <td><Button handleOnClick={() => handleOnEdit(user)} buttonText={'Edit'}></Button></td>
+                                <td><Button handleOnClick={() => handleOnDelete(user.id)} buttonText={'Delete'}></Button></td>
                             </tr>
                         )
                     })}
