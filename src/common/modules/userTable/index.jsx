@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Button from '../../elements/button'
 import { useNavigate } from 'react-router'
+import MyContext from '../../configurations/myContext'
 
 function UserTable() {
     const [users, setUsers] = useState([])
     const navigate = useNavigate()
+    const compData = useContext(MyContext)
 
-    console.log('users*********', users);
+    console.log('compData*********', compData);
 
     useEffect(() => {
         setUsers(JSON.parse(localStorage.getItem('userInfo')) || [])
