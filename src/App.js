@@ -5,17 +5,20 @@ import RouteContainer from "./routes";
 import { ToastContainer } from "react-toastify";
 import MyContext from "./common/configurations/myContext";
 import { useState } from "react";
+import MyContextProvider from "./common/contextProviders/myContextProvider";
+import Context2Provider from "./common/contextProviders/context2Provider";
 
 function App() {
-  const [data, setData] = useState(0);
   return (
     <div className="App">
-      <MyContext.Provider value={{ setData: setData, data: data }}>
-        <Header />
-        <RouteContainer />
-        <ToastContainer />
-        <Footer />
-      </MyContext.Provider>
+      <MyContextProvider>
+        <Context2Provider>
+          <Header />
+          <RouteContainer />
+          <ToastContainer />
+          <Footer />
+        </Context2Provider>
+      </MyContextProvider>
     </div>
   );
 }

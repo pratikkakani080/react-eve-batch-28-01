@@ -12,6 +12,7 @@ import ContactUs from "./common/modules/contactUs";
 import CardDetails from "./common/components/card/cardDetails";
 import UserTable from "./common/modules/userTable";
 import Global from "./common/modules/global";
+import Todo from "./common/modules/todo";
 
 function RouteContainer() {
   const routingList = createBrowserRouter([
@@ -22,6 +23,7 @@ function RouteContainer() {
     { path: "/card-details/:slug/:id", element: <CardDetails /> },
     { path: "/user-table", element: <UserTable /> },
     { path: "/global", element: <Global /> },
+    { path: "/todo", element: <Todo /> },
   ]);
   return (
     <RouterProvider router={routingList}></RouterProvider>
