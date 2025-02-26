@@ -3,7 +3,7 @@ import "./card.css";
 import Button from '../../elements/button';
 
 function Card(props) {
-    // console.log(props);
+    console.log('props(((card', props);
 
     return (
         <div className='card'>
@@ -12,7 +12,7 @@ function Card(props) {
                 <img src={props?.el?.image} alt={'image'} height={'100%'} width={'100%'} />
             </div>
             <div className='title'>
-                <p>
+                <p onClick={() => { props.ref.current.style.backgroundColor = 'red' }}>
                     {props?.el?.title || props.el.name || 'test'}
                 </p>
             </div>
