@@ -13,6 +13,7 @@ import CardDetails from "./common/components/card/cardDetails";
 import UserTable from "./common/modules/userTable";
 import Global from "./common/modules/global";
 import Todo from "./common/modules/todo";
+import PerformanceImp from "./common/modules/performanceImp";
 
 function RouteContainer() {
   const routingList = createBrowserRouter([
@@ -24,6 +25,7 @@ function RouteContainer() {
     { path: "/user-table", element: <UserTable /> },
     { path: "/global", element: <Global /> },
     { path: "/todo", element: <Todo /> },
+    { path: "/perImp", element: <PerformanceImp /> },
   ]);
   return (
     <RouterProvider router={routingList}></RouterProvider>

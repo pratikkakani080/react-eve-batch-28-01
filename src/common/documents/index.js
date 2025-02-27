@@ -12,3 +12,6 @@
 
 
 // 4. useRef
+// 5. useMemo - to cache values
+// 6. useCallback - to cache functions
+// 7. memo - to cache components
