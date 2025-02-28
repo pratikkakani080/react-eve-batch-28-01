@@ -1,9 +1,29 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import Child from './Child';
+import { instance } from '../../configurations/axiosConfig';
 
 function PerformanceImp() {
     const [count, setCount] = useState(0);
     const [todos, setTodos] = useState([]);
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+    const fetchData = async () => {
+        const res = await instance.post('/objects', {
+            "name": "Apple MacBook Pro 16",
+            "data": {
+                "year": 2019,
+                "price": 1849.99,
+                "CPU model": "Intel Core i9",
+                "Hard disk size": "1 TB"
+            }
+        })
+        console.log('res***', res);
+
+    }
+
 
     const calculation = useMemo(() => {
         return expensiveCalculation(count)
